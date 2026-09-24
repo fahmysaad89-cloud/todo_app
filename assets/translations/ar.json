@@ -1,0 +1,31 @@
+{
+    "profile": {
+        "title": "أنشئ ملفك الشخصي",
+        "subtitle": "أضف اسمك وصورتك الشخصية",
+        "full_name": "الاسم الكامل",
+        "full_name_hint": "أحمد عبدالستار",
+        "continue": "متابعة"
+    },
+    "home": {
+        "good_morning": "صباح الخير",
+        "tasks": "المهام",
+        "docs": "المستندات",
+        "pending": "معلّقة",
+        "today_tasks": "مهام اليوم"
+    },
+    "add_task": {
+        "title": "إضافة مهمة",
+        "task_title": "عنوان المهمة",
+        "task_title_hint": "تصميم شاشة تسجيل الدخول",
+        "description": "الوصف",
+        "description_hint": "وصف المهمة..",
+        "status": "الحالة",
+        "choose_color": "اختر اللون",
+        "save_task": "حفظ المهمة"
+    },
+    "status": {
+        "pending": "معلّقة",
+        "in_progress": "قيد التنفيذ",
+        "done": "مكتملة"
+    }
+}

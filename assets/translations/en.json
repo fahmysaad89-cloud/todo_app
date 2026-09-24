@@ -1,0 +1,31 @@
+{
+    "profile": {
+        "title": "Create Your Profile",
+        "subtitle": "Add your name and profile picture",
+        "full_name": "Full Name",
+        "full_name_hint": "Ahmed Abdelsattar",
+        "continue": "Continue"
+    },
+    "home": {
+        "good_morning": "Good Morning",
+        "tasks": "Tasks",
+        "docs": "Docs",
+        "pending": "Pending",
+        "today_tasks": "Today's Tasks"
+    },
+    "add_task": {
+        "title": "Add Task",
+        "task_title": "Task Title",
+        "task_title_hint": "Design Login Screen",
+        "description": "Description",
+        "description_hint": "Task Description..",
+        "status": "Status",
+        "choose_color": "Choose Color",
+        "save_task": "Save Task"
+    },
+    "status": {
+        "pending": "Pending",
+        "in_progress": "In Progress",
+        "done": "Done"
+    }
+}
