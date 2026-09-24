@@ -84,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         label: context.tr('profile.full_name'),
                         child: AppTextField(
                           controller: _nameController,
-                          hintText: context.tr('profile.full_name_hint'),
+                          // hintText: context.tr('profile.full_name_hint'),
                         ),
                       ),
                       SizedBox(height: 28.h),
