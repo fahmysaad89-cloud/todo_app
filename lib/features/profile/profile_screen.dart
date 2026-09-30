@@ -2,8 +2,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:todo_app/core/utils/app_constants.dart';
 import 'package:todo_app/features/add_task/widgets/labeled_field.dart';
 import 'package:todo_app/features/home/home_screen.dart';
+import 'package:todo_app/features/profile/data/user_model.dart';
 import 'package:todo_app/features/profile/widgets/avatar_picker.dart';
 import 'package:todo_app/features/shared_widgets/Language_Button.dart';
 import 'package:todo_app/features/shared_widgets/app_text_field.dart';
@@ -20,11 +24,25 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final _nameController = TextEditingController();
   static const _primary = Color(0xFF5B5FEF);
+  XFile? photo;
 
   @override
   void dispose() {
     _nameController.dispose();
     super.dispose();
+  }
+
+  saveUserData(UserModel user) {
+    Hive.box<UserModel>(AppConstants.userBox)
+        .put(AppConstants.currentUser, user)
+        .then((value) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => const HomeScreen()),
+          );
+        })
+        .catchError((error) {
+          print('error');
+        });
   }
 
   @override
@@ -92,9 +110,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         label: context.tr('profile.continue'),
                         color: _primary,
                         onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (_) => const HomeScreen(),
+                          saveUserData(
+                            UserModel(
+                              image: photo?.path ?? "",
+                              name: _nameController.text,
                             ),
                           );
                         },

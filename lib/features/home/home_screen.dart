@@ -1,12 +1,17 @@
 // lib/features/home/home_screen.dart
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
+import 'package:todo_app/core/utils/app_constants.dart';
 import 'package:todo_app/features/add_task/add_task_screen.dart';
 import 'package:todo_app/features/add_task/widgets/task_status.dart';
 import 'package:todo_app/features/home/widgets/home_header.dart';
 import 'package:todo_app/features/home/widgets/stats_summary_card.dart';
 import 'package:todo_app/features/home/widgets/task_section.dart';
+import 'package:todo_app/features/profile/data/user_model.dart';
 import 'package:todo_app/features/shared_widgets/Language_Button.dart';
 import 'package:todo_app/features/shared_widgets/responsive.dart';
 import 'package:todo_app/features/shared_widgets/task_item.dart';
@@ -67,10 +72,7 @@ class HomeScreen extends StatelessWidget {
                       child: LanguageToggleButton(),
                     ),
                     SizedBox(height: 12.h),
-                    HomeHeader(
-                      greeting: context.tr('home.good_morning'),
-                      userName: 'Saad',
-                    ),
+                    HomeHeader(greeting: context.tr('home.good_morning')),
                     SizedBox(height: 20.h),
                     const StatsSummaryCard(tasks: 12, docs: 5, pending: 7),
                     SizedBox(height: 24.h),
