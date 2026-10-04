@@ -2,6 +2,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:todo_app/core/utils/app_constants.dart';
 import 'package:todo_app/features/add_task/widgets/add_task_header.dart';
 import 'package:todo_app/features/add_task/widgets/color_selector.dart';
 import 'package:todo_app/features/add_task/widgets/labeled_field.dart';
@@ -10,6 +12,7 @@ import 'package:todo_app/features/add_task/widgets/task_status.dart';
 import 'package:todo_app/features/shared_widgets/app_text_field.dart';
 import 'package:todo_app/features/shared_widgets/primary_button.dart';
 import 'package:todo_app/features/shared_widgets/responsive.dart';
+import 'package:todo_app/features/shared_widgets/task_item.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({super.key});
@@ -39,7 +42,27 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     super.dispose();
   }
 
-  void _saveTask() => Navigator.of(context).maybePop();
+  Future<void> _saveTask() async {
+    final title = _titleController.text.trim();
+    if (title.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(context.tr('add_task.title_required'))),
+      );
+      return;
+    }
+
+    await Hive.box<TaskItem>(AppConstants.taskBox).add(
+      TaskItem(
+        title: title,
+        subtitle: _descriptionController.text.trim(),
+        status: _status,
+        color: _selectedColor,
+      ),
+    );
+
+    if (!mounted) return;
+    Navigator.of(context).maybePop();
+  }
 
   @override
   Widget build(BuildContext context) {

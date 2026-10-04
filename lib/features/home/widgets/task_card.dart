@@ -11,12 +11,40 @@ class TaskCard extends StatelessWidget {
 
   const TaskCard({super.key, required this.task, this.onTap});
 
+  Future<void> _confirmDelete(BuildContext context) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(context.tr('home.delete_task')),
+        content: Text(context.tr('home.delete_confirm')),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(context.tr('home.cancel')),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(
+              context.tr('home.delete'),
+              style: const TextStyle(color: Colors.red),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      await task.delete();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final statusColor = task.status.color;
+    final statusColor = task.color;
 
     return InkWell(
       onTap: onTap,
+      onLongPress: () => _confirmDelete(context),
       borderRadius: BorderRadius.circular(16.r),
       child: Container(
         padding: EdgeInsets.all(14.w),
@@ -25,13 +53,12 @@ class TaskCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.03),
-              blurRadius: 8,
-              offset: const Offset(0, 3),
+              color: Colors.black.withValues(alpha: 0.3),
+              blurRadius: 6,
+              offset: const Offset(0, 8),
             ),
           ],
         ),
-
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(
@@ -79,15 +106,21 @@ class TaskCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  const Icon(
-                    Icons.chevron_right,
-                    color: Colors.black,
-                    size: 22,
+                  GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => _confirmDelete(context),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: Icon(
+                        Icons.delete_outline,
+                        color: Colors.red.shade400,
+                        size: 24,
+                      ),
+                    ),
                   ),
                 ],
               ),
               SizedBox(height: 10.h),
-
               FittedBox(
                 fit: BoxFit.scaleDown,
                 alignment: AlignmentDirectional.centerStart,

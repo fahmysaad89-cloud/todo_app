@@ -1,4 +1,8 @@
 {
+    "nav": {
+        "home": "الرئيسية",
+        "task": "مهمة"
+    },
     "profile": {
         "title": "أنشئ ملفك الشخصي",
         "subtitle": "أضف اسمك وصورتك الشخصية",
@@ -11,7 +15,12 @@
         "tasks": "المهام",
         "docs": "المستندات",
         "pending": "معلّقة",
-        "today_tasks": "مهام اليوم"
+        "today_tasks": "مهام اليوم",
+        "no_tasks": "لا توجد مهام بعد",
+        "delete_task": "حذف المهمة",
+        "delete_confirm": "هل أنت متأكد أنك تريد حذف هذه المهمة؟",
+        "cancel": "إلغاء",
+        "delete": "حذف"
     },
     "add_task": {
         "title": "إضافة مهمة",
@@ -21,7 +30,8 @@
         "description_hint": "وصف المهمة..",
         "status": "الحالة",
         "choose_color": "اختر اللون",
-        "save_task": "حفظ المهمة"
+        "save_task": "حفظ المهمة",
+        "title_required": "من فضلك أدخل عنوان المهمة"
     },
     "status": {
         "pending": "معلّقة",

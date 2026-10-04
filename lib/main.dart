@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:todo_app/core/utils/app_constants.dart';
 import 'package:todo_app/features/profile/data/user_model.dart';
+import 'package:todo_app/features/shared_widgets/task_item.dart';
 import 'package:todo_app/todo_app.dart';
 
 Future<void> main() async {
@@ -12,16 +13,17 @@ Future<void> main() async {
   await Hive.initFlutter();
 
   Hive.registerAdapter(UserModelAdapter());
+  Hive.registerAdapter(TaskItemAdapter());
 
   await Hive.openBox<UserModel>(AppConstants.userBox);
+  await Hive.openBox<TaskItem>(AppConstants.taskBox);
 
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('ar')],
-      path:
-          'assets/translations', // <-- change the path of the translation files
-      fallbackLocale: Locale('en'),
-      child: TodoApp(),
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      child: const TodoApp(),
     ),
   );
 }
