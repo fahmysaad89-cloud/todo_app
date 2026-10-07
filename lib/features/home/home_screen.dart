@@ -78,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                                         width: 260.w,
                                         height: 260.w,
                                         repeat: true,
-                                        errorBuilder: (_, __, ___) => Icon(
+                                        errorBuilder: (_, _, _) => Icon(
                                           Icons.inbox_outlined,
                                           size: 80.sp,
                                           color: Colors.grey[400],

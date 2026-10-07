@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     nextpage();
   }
 
-  nextpage() {
+  void nextpage() {
     UserModel? user = Hive.box<UserModel>(
       AppConstants.userBox,
     ).get(AppConstants.currentUser);

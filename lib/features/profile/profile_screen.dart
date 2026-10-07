@@ -32,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.dispose();
   }
 
-  saveUserData(UserModel user) {
+  void saveUserData(UserModel user) {
     Hive.box<UserModel>(AppConstants.userBox)
         .put(AppConstants.currentUser, user)
         .then((value) {
